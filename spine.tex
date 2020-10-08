@@ -1,0 +1,47 @@
+
+%---------------------------------------------------------------------------%
+% @Author Onns
+% @Date: 2020-10-08 13:35:10
+% @Version 1.0
+%---------------------------------------------------------------------------%
+\documentclass[UTF8]{ctexbook}
+\usepackage[paper=a4paper,margin=3cm]{geometry}
+
+% https://stackoverflow.com/a/2458125/13182099
+\def\hyphenateWholeString #1{\xHyphenate#1$\wholeString\unskip}
+
+\def\xHyphenate#1#2\wholeString {\if#1$
+\else\transform{#1}
+\takeTheRest#2\ofTheString\fi}
+\def\takeTheRest#1\ofTheString\fi
+{\fi \xHyphenate#1\wholeString}
+
+\def\transform#1{#1\par}
+
+\renewcommand{\title}[1]{\def\spinetitle{\hyphenateWholeString{#1}}}
+\renewcommand{\author}[1]{\def\spineauthor{\hyphenateWholeString{#1}}}
+\newcommand{\adviser}[3]{\def\spineadviser{\hyphenateWholeString{#1}~\par\hyphenateWholeString{#2}~\par\hyphenateWholeString{#3}}}
+\newcommand{\institute}[1]{\def\spineinst{\hyphenateWholeString{#1}}}
+
+
+\newcommand{\makespine}{
+
+    \newpage\thispagestyle{empty}
+    \linespread{1.0}
+    \songti\zihao{-5}\centering
+    \spinetitle\vfill\spineauthor\vfill\spineadviser\vfill\spineinst
+
+}
+
+% 3.论文书脊的要求（如右图）
+% （1）在论文的书脊以紧排依序打印中文：论文名称、作者姓名、
+% 指导教师、XXX、厦门大学
+% （2）字号字体：小五号宋体。
+
+\begin{document}
+\title{这是你的中文论文名称}
+\author{Onns}
+\adviser{指导教师}{XXX}{教授}
+\institute{厦门大学}
+\makespine
+\end{document}
